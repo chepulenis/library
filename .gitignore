@@ -34,8 +34,8 @@
 # .idea/modules.xml
 # .idea/*.iml
 # .idea/modules
- *.iml
- *.cmd
+*.iml
+*.cmd
 # *.ipr
 
 # CMake
@@ -89,4 +89,4 @@ local.properties
 .mvn/
 .project/
 .idea/
-mvnw
+*.mvnw
