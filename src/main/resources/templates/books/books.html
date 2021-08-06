@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Library Application</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container" align="center">
+		<h1>Books records</h1>
+		<div class="row col-md-14 table-responsive table-hover table-striped">
+			<a href="./books/new-book" class="btn btn-light" sec:authorize="hasAuthority('LIBRARIAN')">Enter New Book</a> <br> <br>
+			<form action="#"  th:action="@{books/book}" th:method="get">
+				<input type="text" name="id" /> <input type="submit"
+					value="Find by id" class="btn btn-primary" />
+			</form>
+			<br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Description</th>
+						<th>ISBN</th>
+						<th>Category</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="book : ${books}">
+						<td th:text="${book.id}">ID</td>
+						<td th:text="${book.title}">Title</td>
+						<td th:text="${book.author}">Author</td>
+						<td th:text="${book.description}">Description</td>
+						<td th:text="${book.ISBN}">ISBN</td>
+						<td th:text="${book.category.name}">Category</td>
+						<td>
+                            <form action="#" sec:authorize="hasAuthority('LIBRARIAN')"
+                                th:action="@{'/books/{id}'(id=${book.id})}"
+                                th:method="put">
+                                <input type="hidden" name="_method" value="put" />
+                                <button type="submit" class="btn btn-success">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="#" sec:authorize="hasAuthority('LIBRARIAN')"
+                                th:action="@{'/books/{id}'(id=${book.id})}"
+                                th:method="delete">
+                                <input type="hidden" name="_method" value="delete" />
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+					</tr>
+				</tbody>
+			</table>
+			<br /> <br /> <a href="..">back</a>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Library Application</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+	<body>
+
+	<br>
+	<br>
+	<div class="container">
+		<h2>Library</h2>
+
+		<p>
+
+			<div sec:authorize="isAuthenticated()">
+				Welcome to our comfortable library. Have a nice day.
+			</div>
+		</p>
+	</div>
+
+	<div class="row col-md-10 table-responsive" align="center">
+		<br> <a>Available options:</a> <br>
+		<br>
+		<p>
+				<a th:href="@{categories}" class="btn btn-light">Categories</a>
+		</p>
+		<p>
+			<a th:href="@{books}" class="btn btn-light">Books</a>
+		</p>
+	<div/>
+		<br>
+		<a href="logout">logout</a>
+
+</body>
+</html>

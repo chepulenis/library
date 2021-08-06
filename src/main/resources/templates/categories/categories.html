@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Library Application</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container" align="center">
+		<h2>Book categories records</h2>
+		<br>
+		<div class="row col-md-7 table-responsive table-hover table-striped">
+			<a href="./categories/new-category" class="btn btn-light" sec:authorize="hasAuthority('LIBRARIAN')">Enter New
+				Book Category</a> <br> <br>
+			<form action="#"
+                                th:action="@{categories/category}"
+                                th:method="get">
+				<input type="text" name="id" /> 
+				<input type="submit"
+					value="Find by id" class="btn btn-primary" />
+			</form>
+			<br>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="category : ${categories}">
+						<td th:text="${category.id}">ID</td>
+						<td th:text="${category.name}">Name</td>
+						<td>
+							<form action="#" sec:authorize="hasAuthority('LIBRARIAN')"
+								th:action="@{'/categories/{id}'(id=${category.id})}"
+								th:method="put">
+								<input type="hidden" name="_method" value="put" />
+								<button type="submit" class="btn btn-success">Edit</button>
+							</form>
+						</td>
+						<td>
+							<form action="#" sec:authorize="hasAuthority('LIBRARIAN')"
+								th:action="@{'/categories/{id}'(id=${category.id})}"
+								th:method="delete">
+								<input type="hidden" name="_method" value="delete" />
+								<button type="submit" class="btn btn-danger">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="..">back</a>
+		</div>
+	</div>
+</body>
+</html>
